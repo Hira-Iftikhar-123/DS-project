@@ -38,7 +38,7 @@ Represents a user interacting with the system, allowing operations such as addin
 
 
 **Clone the repository:**
-git clone https://github.com/Hira-Iftikhae-123/laptop-inventory.git
+git clone https://github.com/Hira-Iftikhar-123/laptop-inventory.git
 
 **Navigate to the project directory:**
 cd laptop-inventory
