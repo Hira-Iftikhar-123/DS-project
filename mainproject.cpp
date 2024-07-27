@@ -2,6 +2,7 @@
 #include<string>
 #include<cstring>
 #include<stack>
+#include<ctime>
 #include<fstream>
 #include<stdlib.h>
 #include<Windows.h>
@@ -75,7 +76,7 @@ public:
 		Price = t->getPrice();
 		Color = t->getColor();
 		Brand = t->getBrand();
-		StorageCapacity = t->getStorage();
+		StorageCapacity = t->getStorage() ;
 		screenSize = t->getScreen();
 		CameraResolution = t->getCamera();
 		BatteryLife = t->getBattery();
@@ -789,7 +790,7 @@ public:
 class shoppingcart
 {
 public:
-	Laptop* head;
+	Laptop *head;
 	int noofprod;
 	float totalcost;
 	shoppingcart()
@@ -802,7 +803,7 @@ public:
 	{
 		Laptop* temp = head;
 		float p;
-		Laptop* n = new Laptop(root, isbn);
+		Laptop* n = new Laptop(root,isbn);
 		p = root->getPrice();
 
 		totalcost += p;
@@ -822,7 +823,7 @@ public:
 			temp->ptr = n;
 		}
 	}
-	void deleteitems(Laptop* root, string x)
+	void deleteitems(Laptop *root,string x)
 	{
 		if (head == NULL)
 		{
@@ -831,8 +832,8 @@ public:
 		}
 		else
 		{
-			Laptop* curr = head->ptr;
-			Laptop* prev = head;
+			Laptop *curr = head->ptr;
+			Laptop *prev = head;
 			//delete from beginning
 			if (prev->getISBN() == x)
 			{
@@ -851,7 +852,7 @@ public:
 					prev->ptr = curr->ptr;
 					totalcost -= curr->getPrice();
 					noofprod--;
-					cout << "Item: " << curr->getBrand() << " has been deleted successfully!!" << endl;
+					cout << "Item: " << curr->getBrand()<< " has been deleted successfully!!" << endl;
 					delete curr;
 					curr = prev->ptr;
 					return;
@@ -862,7 +863,6 @@ public:
 			cout << "This item does not exists in the cart" << endl;
 		}
 	}
-
 	void printing()
 	{
 		if (head == NULL)
@@ -889,11 +889,12 @@ public:
 		{
 			return true;
 		}
-		else return false;
+		return false;
 	}
 	void checkout()
 	{
 		int ch;
+		printing();
 		if (checkempty() == 1)
 		{
 			Sleep(2000);
@@ -1001,13 +1002,13 @@ public:
 	}
 	void deleteCart(Laptop* root, string x)
 	{
-		c.deleteitems(root, x);
+		c.deleteitems(root,x);
 	}
 	void printing()
 	{
 		c.printing();
 	}
-	void checkout(Laptop* root)
+	void checkout(Laptop *root)
 	{
 		c.checkout();
 	}
@@ -1342,27 +1343,7 @@ int main()
 
 						break;
 					case '2'://check out(shopping cart)
-						user.printing();
-						if (user.c.checkempty() == 0)
-						{
-							cout << "Do you want to delete an item? Press 1 for yes and 2 for no: ";
-							int choice;
-							cin >> choice;
-
-							if (choice == 1)
-							{
-								cout << "Enter ISBN of the item you want to delete: ";
-								cin >> id;
-
-								if (records.validate(rootSort, id) == 0) {
-									cout << "\nInvalid ISBN\n";
-								}
-								else 
-								{
-									user.deleteCart(tree.retrieveRoot(rootSort, id), id);
-								}
-							}
-						}
+						
 						user.checkout(root);
 						system("pause");
 						break;
